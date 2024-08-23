@@ -10,8 +10,8 @@ spec:
     app: tacos-burritos-ml
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
+      port: 8000
+      targetPort: 8000
 ---
 # Source: TacosBurritos/templates/deployment.yaml
 apiVersion: apps/v1
@@ -19,7 +19,7 @@ kind: Deployment
 metadata:
   name: tacos-burritos-ml-deployment
   annotations:
-    version: v-0.0.1-39
+    version: v-0.0.1-ml-1-42
       
 spec:
   strategy: 
@@ -33,11 +33,11 @@ spec:
       labels:
         app: tacos-burritos-ml      
       annotations:
-        version: v-0.0.1-39
+        version: v-0.0.1-ml-1-42
     spec:
       containers:
       - name: tacos-burritos-ml
-        image: helloworldkraftacr.azurecr.io/tacosburritos:4138
+        image: helloworldkraftacr.azurecr.io/tacosburritos:8612
         imagePullPolicy: Always
         ports:
-        - containerPort: 8080
+        - containerPort: 8000
