@@ -1,0 +1,27 @@
+apiVersion: hub.kalypso.io/v1alpha1
+kind: DeploymentDescriptor
+metadata:
+  name: dev-tacos-burritos-ml
+  labels:
+    config-revision: 522c20a4db7e03a73743fad21b39c3523fd134da
+spec:
+  workload:
+    name: tacos-burritos-ml
+    source:
+        repo: https://github.com/eedorenko/mlops-gitops
+        branch: main
+        path: .
+    application:
+        name: dm              
+        workspace:
+            name: dm
+  deploymentTarget:
+    name: tacos-burritos-ml-dev
+    environment: dev
+    manifests:
+        repo: https://github.com/eedorenko/mlops-gitops-gitops
+        branch: dev
+        path: ./tacos-burritos-ml
+  workloadVersion:
+    version: v-0.0.1-36
+    commit: ad157569c453b8378416caf83133e35bbc22a9b8
