@@ -1,0 +1,27 @@
+apiVersion: hub.kalypso.io/v1alpha1
+kind: DeploymentDescriptor
+metadata:
+  name: dev-rename_me
+  labels:
+    config-revision: c553431d7f991af4cd233204bb76a9a3d3641840
+spec:
+  workload:
+    name: tacos-burritos-ml
+    source:
+        repo: https://github.com/eedorenko/mlops-gitops
+        branch: main
+        path: .
+    application:
+        name: dm              
+        workspace:
+            name: dm
+  deploymentTarget:
+    name: rename_me-dev
+    environment: dev
+    manifests:
+        repo: https://github.com/eedorenko/mlops-gitops-gitops
+        branch: dev
+        path: ./rename_me
+  workloadVersion:
+    version: v-0.0.1-34
+    commit: ad157569c453b8378416caf83133e35bbc22a9b8
