@@ -19,7 +19,7 @@ kind: Deployment
 metadata:
   name: tacos-burritos-ml-deployment
   annotations:
-    version: v-0.0.1-44-ml-7
+    version: v-0.0.1-45-ml-6
       
 spec:
   strategy: 
@@ -33,7 +33,7 @@ spec:
       labels:
         app: tacos-burritos-ml      
       annotations:
-        version: v-0.0.1-44-ml-7
+        version: v-0.0.1-45-ml-6
     spec:
       containers:
       - name: tacos-burritos-ml
