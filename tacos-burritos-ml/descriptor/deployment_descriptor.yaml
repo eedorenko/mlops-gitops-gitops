@@ -6,7 +6,7 @@ metadata:
     config-revision: bc9ad558f3ef52c843a32908e23f1544ad5239e8
 spec:
   workload:
-    name: tacos-burritos-ml
+    name: tacosburritosml
     source:
         repo: https://github.com/eedorenko/mlops-gitops
         branch: main
@@ -23,5 +23,5 @@ spec:
         branch: dev
         path: ./tacos-burritos-ml
   workloadVersion:
-    version: v-0.0.1-46-ml-5
-    commit: 52f74ed052a5a5fd54d550bfbb584c4718ec9de7
+    version: v-0.0.1-48-ml-7
+    commit: 6fa9605bca5c958603e7b3771f654ab77a483a05
