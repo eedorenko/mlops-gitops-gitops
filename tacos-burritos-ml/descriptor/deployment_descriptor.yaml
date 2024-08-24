@@ -14,7 +14,7 @@ spec:
     application:
         name: dm              
         workspace:
-            name: kaizen-team
+            name: demo-team
   deploymentTarget:
     name: tacos-burritos-ml-dev
     environment: dev
@@ -23,5 +23,5 @@ spec:
         branch: dev
         path: ./tacos-burritos-ml
   workloadVersion:
-    version: v-0.0.1-50-ml-7
-    commit: 73fa0384b5f52a323992c1dff73b7a5e737b22e9
+    version: v-0.0.1-51-ml-7
+    commit: 05965c21c8182ef1a10f7078ba022e77d05b64f0
