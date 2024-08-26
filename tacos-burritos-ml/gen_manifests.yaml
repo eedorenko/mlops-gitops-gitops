@@ -19,7 +19,7 @@ kind: Deployment
 metadata:
   name: tacos-burritos-ml-deployment
   annotations:
-    version: v-0.0.1-52-ml-8
+    version: v-0.0.1-55-ml-8
       
 spec:
   strategy: 
@@ -33,11 +33,11 @@ spec:
       labels:
         app: tacos-burritos-ml      
       annotations:
-        version: v-0.0.1-52-ml-8
+        version: v-0.0.1-55-ml-8
     spec:
       containers:
       - name: tacos-burritos-ml
-        image: helloworldkraftacr.azurecr.io/tacosburritos:0596
+        image: helloworldkraftacr.azurecr.io/tacosburritos:b243
         imagePullPolicy: Always
         ports:
         - containerPort: 8000
