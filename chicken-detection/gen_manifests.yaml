@@ -5,12 +5,17 @@ kind: ConfigMap
 metadata:
   name: entree-detection-config
   annotations:
-    version: 0.0.1-72
+    version: 0.0.1-78
   
 data:  
   TASK_TYPE: object_detection
-  MODEL_CLASS_MAPPING: "{0: raw_chicken_wing, 1:raw_chicken_thigh,\n2:raw_chicken_drum, 3:raw_chicken_breast,
-   \n4: cooked_chicken_wing, 5: cooked_chicken_thigh, \n6: cooked_chicken_drum, 7:cooked_chicken_breast}\n"
+  MODEL_CLASS_MAPPING: |
+      {0: raw_chicken_wing, 1:raw_chicken_thigh,
+      2:raw_chicken_drum, 3:raw_chicken_breast, 
+      4: cooked_chicken_wing, 5: cooked_chicken_thigh, 
+      6: cooked_chicken_drum, 7:cooked_chicken_breast}
+      
+      
   MODEL_CONFIDENCE_THRESHOLD: 0.65
   WORKER_OPERATING_FPS: 6
   WORKER_TRACKER_NAME: norfair
@@ -37,7 +42,7 @@ kind: Deployment
 metadata:
   name: entree-detection-deployment
   annotations:
-    version: 0.0.1-72
+    version: 0.0.1-78
   
 spec:
   strategy:
@@ -51,12 +56,12 @@ spec:
       labels:
         task: entree-detection
       annotations:
-        version: 0.0.1-72
+        version: 0.0.1-78
     spec:
       serviceAccountName: detection-model-sa
       containers:
       - name: inference-api
-        image: ghcr.io/eedorenko/mlops-gitops/burger_detection_model_automl:0.0.1-72
+        image: ghcr.io/eedorenko/mlops-gitops/burger_detection_model_automl:0.0.1-78
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
