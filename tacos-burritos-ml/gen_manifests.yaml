@@ -55,7 +55,7 @@ spec:
       serviceAccountName: detection-model-sa
       containers:
       - name: inference-api
-        image: helloworldkraftacr.azurecr.io/tacosburritos:0.0.1-71
+        image: ghcr.io/eedorenko/mlops-gitops.azurecr.io/mlops-gitops:0.0.1-71
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
