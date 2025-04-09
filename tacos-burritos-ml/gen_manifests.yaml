@@ -5,11 +5,11 @@ kind: ConfigMap
 metadata:
   name: tacos-burritos-ml-config
   annotations:
-    version: 0.0.1-72
+    version: 0.0.1-73
   
 data:  
   TASK_TYPE: object_detection
-  MODEL_CLASS_MAPPING: TBD
+  MODEL_CLASS_MAPPING:   TBD
   MODEL_CONFIDENCE_THRESHOLD: TBD
   WORKER_OPERATING_FPS: TBD
   WORKER_TRACKER_NAME: TBD
@@ -36,7 +36,7 @@ kind: Deployment
 metadata:
   name: tacos-burritos-ml-deployment
   annotations:
-    version: 0.0.1-72
+    version: 0.0.1-73
   
 spec:
   strategy:
@@ -50,12 +50,12 @@ spec:
       labels:
         task: tacos-burritos-ml
       annotations:
-        version: 0.0.1-72
+        version: 0.0.1-73
     spec:
       serviceAccountName: detection-model-sa
       containers:
       - name: inference-api
-        image: ghcr.io/eedorenko/mlops-gitops.azurecr.io/mlops-gitops:0.0.1-72
+        image: ghcr.io/eedorenko/mlops-gitops.azurecr.io/mlops-gitops:0.0.1-73
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
