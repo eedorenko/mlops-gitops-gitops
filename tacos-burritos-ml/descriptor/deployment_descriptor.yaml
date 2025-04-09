@@ -23,5 +23,5 @@ spec:
         branch: dev
         path: ./tacos-burritos-ml
   workloadVersion:
-    version: v-0.0.1-58-ml-11
-    commit: b24300d257c69fff5b70e414930119a2bea3848e
+    version: 0.0.1-68
+    commit: 4717dd5057ab923c9db208ce00d1a5fb9fcc4229
