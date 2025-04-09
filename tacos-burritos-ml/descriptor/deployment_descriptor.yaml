@@ -1,7 +1,7 @@
 apiVersion: hub.kalypso.io/v1alpha1
 kind: DeploymentDescriptor
 metadata:
-  name: dev-tacos-burritos-ml
+  name: stage-tacos-burritos-ml
   labels:
     config-revision: bc9ad558f3ef52c843a32908e23f1544ad5239e8
 spec:
@@ -16,11 +16,11 @@ spec:
         workspace:
             name: demo-team
   deploymentTarget:
-    name: tacos-burritos-ml-dev
-    environment: dev
+    name: tacos-burritos-ml-stage
+    environment: stage
     manifests:
         repo: https://github.com/eedorenko/mlops-gitops-gitops
-        branch: dev
+        branch: stage
         path: ./tacos-burritos-ml
   workloadVersion:
     version: 0.0.1-69
