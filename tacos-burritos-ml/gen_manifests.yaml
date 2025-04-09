@@ -5,7 +5,7 @@ kind: ConfigMap
 metadata:
   name: tacos-burritos-ml-config
   annotations:
-    version: 0.0.1-78
+    version: 0.0.1-80
   
 data:  
   TASK_TYPE: object_detection
@@ -20,11 +20,11 @@ data:
       7: cooked_chicken_breast
       
       
-  MODEL_CONFIDENCE_THRESHOLD: TBD
-  WORKER_OPERATING_FPS: TBD
+  MODEL_CONFIDENCE_THRESHOLD: "TBD"
+  WORKER_OPERATING_FPS: "TBD"
   WORKER_TRACKER_NAME: TBD
-  WORKER_TRACKER_DISTANCE_FUNCTION: TBD
-  WORKER_TRACKER_DISTANCE_THRESHOLD: TBD
+  WORKER_TRACKER_DISTANCE_FUNCTION: "TBD"
+  WORKER_TRACKER_DISTANCE_THRESHOLD: "TBD"
 ---
 # Source: TacosBurritos/templates/service.yaml
 apiVersion: v1
@@ -46,7 +46,7 @@ kind: Deployment
 metadata:
   name: tacos-burritos-ml-deployment
   annotations:
-    version: 0.0.1-78
+    version: 0.0.1-80
   
 spec:
   strategy:
@@ -60,12 +60,12 @@ spec:
       labels:
         task: tacos-burritos-ml
       annotations:
-        version: 0.0.1-78
+        version: 0.0.1-80
     spec:
       serviceAccountName: detection-model-sa
       containers:
       - name: inference-api
-        image: ghcr.io/eedorenko/mlops-gitops.azurecr.io/mlops-gitops:0.0.1-78
+        image: ghcr.io/eedorenko/mlops-gitops.azurecr.io/mlops-gitops:0.0.1-80
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
