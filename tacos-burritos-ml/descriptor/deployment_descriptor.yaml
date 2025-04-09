@@ -3,7 +3,7 @@ kind: DeploymentDescriptor
 metadata:
   name: dev-tacos-burritos-ml
   labels:
-    config-revision: 03778ed3e76436bc55f97b56d519f6458179417b
+    config-revision: d1cc14575e2b00e6adc089bb6051d749da68bf03
 spec:
   workload:
     name: tacos-burritos-ml
