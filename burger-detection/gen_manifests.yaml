@@ -5,17 +5,17 @@ kind: ConfigMap
 metadata:
   name: burger-detection-config
   annotations:
-    version: 0.0.1-78
+    version: 0.0.1-80
   
 data:  
   TASK_TYPE: object_detection
   MODEL_CLASS_MAPPING: |
       {0:patty, 1:in_progress, 2:completed_burger, 3:packaged_burger}
-  MODEL_CONFIDENCE_THRESHOLD: 0.75
-  WORKER_OPERATING_FPS: 6
+  MODEL_CONFIDENCE_THRESHOLD: "0.75"
+  WORKER_OPERATING_FPS: "6"
   WORKER_TRACKER_NAME: norfair
-  WORKER_TRACKER_DISTANCE_FUNCTION: kou
-  WORKER_TRACKER_DISTANCE_THRESHOLD: 0.75
+  WORKER_TRACKER_DISTANCE_FUNCTION: "kou"
+  WORKER_TRACKER_DISTANCE_THRESHOLD: "0.75"
 ---
 # Source: TacosBurritos/templates/service.yaml
 apiVersion: v1
@@ -37,7 +37,7 @@ kind: Deployment
 metadata:
   name: burger-detection-deployment
   annotations:
-    version: 0.0.1-78
+    version: 0.0.1-80
   
 spec:
   strategy:
@@ -51,12 +51,12 @@ spec:
       labels:
         task: burger-detection
       annotations:
-        version: 0.0.1-78
+        version: 0.0.1-80
     spec:
       serviceAccountName: detection-model-sa
       containers:
       - name: inference-api
-        image: ghcr.io/eedorenko/mlops-gitops/burger_detection_model_automl:0.0.1-78
+        image: ghcr.io/eedorenko/mlops-gitops/burger_detection_model_automl:0.0.1-80
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
