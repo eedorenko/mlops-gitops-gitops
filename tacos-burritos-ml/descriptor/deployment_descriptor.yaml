@@ -3,7 +3,7 @@ kind: DeploymentDescriptor
 metadata:
   name: stage-tacos-burritos-ml
   labels:
-    config-revision: bc9ad558f3ef52c843a32908e23f1544ad5239e8
+    config-revision: 18cc65ab1a70887e9616da1f1a7262687e08edfe
 spec:
   workload:
     name: tacos-burritos-ml
