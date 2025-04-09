@@ -3,7 +3,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: tacos-burritos-ml-config
+  name: detection-model-config
   annotations:
     version: 0.0.1-70
   
@@ -20,11 +20,11 @@ data:
 apiVersion: v1
 kind: Service
 metadata:
-  name: tacos-burritos-ml-service
+  name: detection-model-service
       
 spec:
   selector:
-    app: tacos-burritos-ml
+    app: detection-model
   ports:
     - protocol: TCP
       port: 8080
@@ -34,7 +34,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tacos-burritos-ml-deployment
+  name: detection-model-deployment
   annotations:
     version: 0.0.1-70
   
@@ -44,11 +44,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: tacos-burritos-ml
+      app: detection-model
   template:
     metadata:
       labels:
-        app: tacos-burritos-ml
+        app: detection-model
       annotations:
         version: 0.0.1-70
     spec:
@@ -87,7 +87,7 @@ spec:
               - ALL
         envFrom:
         - configMapRef:
-            name: tacos-burritos-ml-config
+            name: detection-model-config
         #read env vars from configmap
         env:
           - name: TASK_TYPE

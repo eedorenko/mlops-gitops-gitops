@@ -3,10 +3,10 @@ kind: DeploymentDescriptor
 metadata:
   name: dev-tacos-burritos-ml
   labels:
-    config-revision: bc9ad558f3ef52c843a32908e23f1544ad5239e8
+    config-revision: 11cb98be5adc9b4d5b25d776a21b7a20a4a8877c
 spec:
   workload:
-    name: null
+    name: tacos-burritos-ml
     source:
         repo: https://github.com/eedorenko/mlops-gitops
         branch: main
