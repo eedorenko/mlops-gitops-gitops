@@ -5,11 +5,12 @@ kind: ConfigMap
 metadata:
   name: tacos-burritos-ml-config
   annotations:
-    version: 0.0.1-73
+    version: 0.0.1-75
   
 data:  
   TASK_TYPE: object_detection
-  MODEL_CLASS_MAPPING:   TBD
+  MODEL_CLASS_MAPPING:   "{0: raw_chicken_wing, 1:raw_chicken_thigh,\n2:raw_chicken_drum, 3:raw_chicken_breast,
+    \n4: cooked_chicken_wing, 5: cooked_chicken_thigh, \n6: cooked_chicken_drum, 7:cooked_chicken_breast}\n\n\n"
   MODEL_CONFIDENCE_THRESHOLD: TBD
   WORKER_OPERATING_FPS: TBD
   WORKER_TRACKER_NAME: TBD
@@ -36,7 +37,7 @@ kind: Deployment
 metadata:
   name: tacos-burritos-ml-deployment
   annotations:
-    version: 0.0.1-73
+    version: 0.0.1-75
   
 spec:
   strategy:
@@ -50,12 +51,12 @@ spec:
       labels:
         task: tacos-burritos-ml
       annotations:
-        version: 0.0.1-73
+        version: 0.0.1-75
     spec:
       serviceAccountName: detection-model-sa
       containers:
       - name: inference-api
-        image: ghcr.io/eedorenko/mlops-gitops.azurecr.io/mlops-gitops:0.0.1-73
+        image: ghcr.io/eedorenko/mlops-gitops.azurecr.io/mlops-gitops:0.0.1-75
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
