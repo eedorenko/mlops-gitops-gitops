@@ -23,5 +23,5 @@ spec:
         branch: stage
         path: ./tacos-burritos-ml
   workloadVersion:
-    version: 0.0.1-72
-    commit: 6d0d5cf444f543e453d9467a05938aaa5131dfc1
+    version: 0.0.1-75
+    commit: b2167e11ed1998f7a56c990c6fa4664933cf0d72
