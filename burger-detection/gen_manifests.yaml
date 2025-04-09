@@ -3,13 +3,13 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: detection-model-config
+  name: burger-detection-config
   annotations:
-    version: 0.0.1-69
+    version: 0.0.1-72
   
 data:  
   TASK_TYPE: object_detection
-  MODEL_CLASS_MAPPING: {0:patty, 1:in_progress, 2:completed_burger, 3:packaged_burger}
+  MODEL_CLASS_MAPPING: '{0:patty, 1:in_progress, 2:completed_burger, 3:packaged_burger}'
   MODEL_CONFIDENCE_THRESHOLD: 0.75
   WORKER_OPERATING_FPS: 6
   WORKER_TRACKER_NAME: norfair
@@ -20,11 +20,11 @@ data:
 apiVersion: v1
 kind: Service
 metadata:
-  name: detection-model-service
+  name: burger-detection-service
       
 spec:
   selector:
-    app: detection-model
+    app: burger-detection
   ports:
     - protocol: TCP
       port: 8080
@@ -34,9 +34,9 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: detection-model-deployment
+  name: burger-detection-deployment
   annotations:
-    version: 0.0.1-69
+    version: 0.0.1-72
   
 spec:
   strategy:
@@ -44,18 +44,18 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: detection-model
+      task: burger-detection
   template:
     metadata:
       labels:
-        app: detection-model
+        task: burger-detection
       annotations:
-        version: 0.0.1-69
+        version: 0.0.1-72
     spec:
       serviceAccountName: detection-model-sa
       containers:
       - name: inference-api
-        image: helloworldkraftacr.azurecr.io/tacosburritos:0.0.1-69
+        image: ghcr.io/eedorenko/mlops-gitops/burger_detection_model_automl:0.0.1-72
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
@@ -87,7 +87,7 @@ spec:
               - ALL
         envFrom:
         - configMapRef:
-            name: detection-model-config
+            name: burger-detection-config
         #read env vars from configmap
         env:
           - name: TASK_TYPE
