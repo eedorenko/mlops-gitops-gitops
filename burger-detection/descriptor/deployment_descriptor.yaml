@@ -3,7 +3,7 @@ kind: DeploymentDescriptor
 metadata:
   name: prod-gray-burger-detection
   labels:
-    config-revision: 53d3d6671cfd38ee1dc525ca15f13c4f4d9a3dea
+    config-revision: bde8b0bb2f2534c7b4a95991741ffb09aae2d795
 spec:
   workload:
     name: tacos-burritos-ml

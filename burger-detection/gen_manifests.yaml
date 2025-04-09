@@ -55,7 +55,7 @@ spec:
       serviceAccountName: detection-model-sa
       containers:
       - name: inference-api
-        image: helloworldkraftacr.azurecr.io/tacosburritos:0.0.1-69
+        image: ghcr.io/eedorenko/mlops-gitops/burger_detection_model_automl:0.0.1-69
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
