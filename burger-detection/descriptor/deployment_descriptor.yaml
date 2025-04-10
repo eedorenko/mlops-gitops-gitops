@@ -23,5 +23,5 @@ spec:
         branch: prod-gray
         path: ./burger-detection
   workloadVersion:
-    version: 0.0.1-80
-    commit: 1bbe95013693768ebf170afd257a56d2ba967b3c
+    version: 0.0.1-81
+    commit: bc84915da4a349cc7c0d1d7a7026b789d89b209e
