@@ -25,7 +25,7 @@ metadata:
       
 spec:
   selector:
-    app: burger-detection
+    task: burger-detection
   ports:
     - protocol: TCP
       port: 8000
