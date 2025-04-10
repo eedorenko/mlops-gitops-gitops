@@ -5,7 +5,7 @@ kind: ConfigMap
 metadata:
   name: entree-detection-config
   annotations:
-    version: 0.0.1-85
+    version: 0.0.1-87
   
 data:  
   TASK_TYPE: object_detection
@@ -42,7 +42,7 @@ kind: Deployment
 metadata:
   name: entree-detection-deployment
   annotations:
-    version: 0.0.1-85
+    version: 0.0.1-87
   
 spec:
   strategy:
@@ -56,12 +56,12 @@ spec:
       labels:
         task: entree-detection
       annotations:
-        version: 0.0.1-85
+        version: 0.0.1-87
     spec:
       serviceAccountName: chicken-detection-sa
       containers:
       - name: inference-api
-        image: ghcr.io/eedorenko/mlops-gitops/chicken_detection_model_automl:0.0.1-85
+        image: ghcr.io/eedorenko/mlops-gitops/chicken_detection_model_automl:0.0.1-87
         imagePullPolicy: Always
         ports:
         - containerPort: 8000
