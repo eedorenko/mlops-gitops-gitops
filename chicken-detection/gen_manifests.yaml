@@ -5,7 +5,7 @@ kind: ConfigMap
 metadata:
   name: entree-detection-config
   annotations:
-    version: 0.0.1-82
+    version: 0.0.1-84
   
 data:  
   TASK_TYPE: object_detection
@@ -30,11 +30,11 @@ metadata:
       
 spec:
   selector:
-    app: entree-detection
+    task: entree-detection
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
+      port: 8000
+      targetPort: 8000
 ---
 # Source: TacosBurritos/templates/deployment.yaml
 apiVersion: apps/v1
@@ -42,7 +42,7 @@ kind: Deployment
 metadata:
   name: entree-detection-deployment
   annotations:
-    version: 0.0.1-82
+    version: 0.0.1-84
   
 spec:
   strategy:
@@ -56,15 +56,15 @@ spec:
       labels:
         task: entree-detection
       annotations:
-        version: 0.0.1-82
+        version: 0.0.1-84
     spec:
       serviceAccountName: chicken-detection-sa
       containers:
       - name: inference-api
-        image: ghcr.io/eedorenko/mlops-gitops/chicken_detection_model_automl:0.0.1-82
+        image: ghcr.io/eedorenko/mlops-gitops/chicken_detection_model_automl:0.0.1-84
         imagePullPolicy: Always
         ports:
-        - containerPort: 8080
+        - containerPort: 8000
         resources:
           requests:
             cpu: 500m
@@ -74,12 +74,12 @@ spec:
             memory: 1000Mi
         readinessProbe:
           httpGet:
-            path: /health
-            port: 8080
+            path: /predict
+            port: 8000
         livenessProbe:
           httpGet:
-            path: /health
-            port: 8080
+            path: /predict
+            port: 8000
         securityContext:
           readOnlyRootFilesystem: true
           allowPrivilegeEscalation: false
@@ -151,3 +151,9 @@ spec:
               configMapKeyRef:
                 name: platform-config
                 key: worker_zones_rentry_buffer_time
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmp-volume
+      volumes:
+      - name: tmp-volume
+        emptyDir: {}
