@@ -1,12 +1,12 @@
 apiVersion: hub.kalypso.io/v1alpha1
 kind: DeploymentDescriptor
 metadata:
-  name: prod-gray-burger-detection
+  name: prod-gray-entree-detection
   labels:
     config-revision: 7446438fa0fae9b4eeab61bb19fdb7b9568292d0
 spec:
   workload:
-    name: burger-detection
+    name: entree-detection
     source:
         repo: https://github.com/eedorenko/mlops-gitops
         branch: main
@@ -16,12 +16,12 @@ spec:
         workspace:
             name: dt
   deploymentTarget:
-    name: burger-detection-prod-gray
+    name: entree-detection-prod-gray
     environment: prod-gray
     manifests:
         repo: https://github.com/eedorenko/mlops-gitops-gitops
         branch: prod-gray
-        path: ./burger-detection
+        path: ./entree-detection
   workloadVersion:
     version: 0.0.1-99
     commit: 12c8674ace53ff026258fd3508e4ba7544be39a7
