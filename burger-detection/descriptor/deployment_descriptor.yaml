@@ -14,7 +14,7 @@ spec:
     application:
         name: kos          
         workspace:
-            name: demo-team
+            name: dt
   deploymentTarget:
     name: burger-detection-dev
     environment: dev
@@ -23,5 +23,5 @@ spec:
         branch: dev
         path: ./burger-detection
   workloadVersion:
-    version: 0.0.1-96
-    commit: adc804bd3003586d2a661bf8eb34b58d576e85bb
+    version: 0.0.1-97
+    commit: 88e0cd89e19bccc2def4ae7887c606d77b729c48
