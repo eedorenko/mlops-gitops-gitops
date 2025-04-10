@@ -5,7 +5,7 @@ kind: ConfigMap
 metadata:
   name: burger-detection-config
   annotations:
-    version: 0.0.1-81
+    version: 0.0.1-82
   
 data:  
   TASK_TYPE: object_detection
@@ -37,7 +37,7 @@ kind: Deployment
 metadata:
   name: burger-detection-deployment
   annotations:
-    version: 0.0.1-81
+    version: 0.0.1-82
   
 spec:
   strategy:
@@ -51,12 +51,12 @@ spec:
       labels:
         task: burger-detection
       annotations:
-        version: 0.0.1-81
+        version: 0.0.1-82
     spec:
       serviceAccountName: burger-detection-sa
       containers:
       - name: inference-api
-        image: ghcr.io/eedorenko/mlops-gitops/burger_detection_model_automl:0.0.1-81
+        image: ghcr.io/eedorenko/mlops-gitops/burger_detection_model_automl:0.0.1-82
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
@@ -145,4 +145,4 @@ spec:
             valueFrom:
               configMapKeyRef:
                 name: platform-config
-                key: worker_zones_reentry_buffer_time
+                key: worker_zones_rentry_buffer_time
