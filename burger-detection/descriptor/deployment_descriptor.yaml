@@ -1,0 +1,27 @@
+apiVersion: hub.kalypso.io/v1alpha1
+kind: DeploymentDescriptor
+metadata:
+  name: stage-burger-detection
+  labels:
+    config-revision: e2eef06e5bcfe0a8b24a06ea70e167060f11cdc3
+spec:
+  workload:
+    name: burger-detection
+    source:
+        repo: https://github.com/eedorenko/mlops-gitops
+        branch: main
+        path: .
+    application:
+        name: dm              
+        workspace:
+            name: demo-team
+  deploymentTarget:
+    name: burger-detection-stage
+    environment: stage
+    manifests:
+        repo: https://github.com/eedorenko/mlops-gitops-gitops
+        branch: stage
+        path: ./burger-detection
+  workloadVersion:
+    version: 0.0.1-85
+    commit: e37357e679a077007a9a1d8a0e03491a8ff28916
