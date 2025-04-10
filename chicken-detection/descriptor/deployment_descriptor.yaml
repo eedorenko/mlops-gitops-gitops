@@ -12,7 +12,7 @@ spec:
         branch: main
         path: .
     application:
-        name: dm              
+        name: kos          
         workspace:
             name: demo-team
   deploymentTarget:
@@ -23,5 +23,5 @@ spec:
         branch: stage
         path: ./chicken-detection
   workloadVersion:
-    version: 0.0.1-85
-    commit: e37357e679a077007a9a1d8a0e03491a8ff28916
+    version: 0.0.1-96
+    commit: adc804bd3003586d2a661bf8eb34b58d576e85bb
