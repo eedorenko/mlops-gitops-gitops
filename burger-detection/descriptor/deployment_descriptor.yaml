@@ -3,7 +3,7 @@ kind: DeploymentDescriptor
 metadata:
   name: prod-gray-burger-detection
   labels:
-    config-revision: 960b0ad96692d61a4cfdb9844e772800cfb4c4f2
+    config-revision: ad1ea46b875518ec6c8cf09e76de5fb8bd980291
 spec:
   workload:
     name: burger-detection
