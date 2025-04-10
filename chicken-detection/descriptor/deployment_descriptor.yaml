@@ -23,5 +23,5 @@ spec:
         branch: dev
         path: ./chicken-detection
   workloadVersion:
-    version: 0.0.1-97
-    commit: 88e0cd89e19bccc2def4ae7887c606d77b729c48
+    version: 0.0.1-98
+    commit: c22e6ca7535d3dd5788762cf57de18a4aa7d35d0
