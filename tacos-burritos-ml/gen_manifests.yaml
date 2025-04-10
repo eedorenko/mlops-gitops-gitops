@@ -5,7 +5,7 @@ kind: ConfigMap
 metadata:
   name: tacos-burritos-ml-config
   annotations:
-    version: 0.0.1-82
+    version: 0.0.1-83
   
 data:  
   TASK_TYPE: object_detection
@@ -34,11 +34,11 @@ metadata:
       
 spec:
   selector:
-    app: tacos-burritos-ml
+    task: tacos-burritos-ml
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
+      port: 8000
+      targetPort: 8000
 ---
 # Source: TacosBurritos/templates/deployment.yaml
 apiVersion: apps/v1
@@ -46,7 +46,7 @@ kind: Deployment
 metadata:
   name: tacos-burritos-ml-deployment
   annotations:
-    version: 0.0.1-82
+    version: 0.0.1-83
   
 spec:
   strategy:
@@ -60,15 +60,15 @@ spec:
       labels:
         task: tacos-burritos-ml
       annotations:
-        version: 0.0.1-82
+        version: 0.0.1-83
     spec:
       serviceAccountName: detection-model-sa
       containers:
       - name: inference-api
-        image: ghcr.io/eedorenko/mlops-gitops.azurecr.io/mlops-gitops:0.0.1-82
+        image: ghcr.io/eedorenko/mlops-gitops.azurecr.io/mlops-gitops:0.0.1-83
         imagePullPolicy: Always
         ports:
-        - containerPort: 8080
+        - containerPort: 8000
         resources:
           requests:
             cpu: 500m
@@ -78,12 +78,12 @@ spec:
             memory: 1000Mi
         readinessProbe:
           httpGet:
-            path: /health
-            port: 8080
+            path: /predict
+            port: 8000
         livenessProbe:
           httpGet:
-            path: /health
-            port: 8080
+            path: /predict
+            port: 8000
         securityContext:
           readOnlyRootFilesystem: true
           allowPrivilegeEscalation: false
@@ -155,3 +155,9 @@ spec:
               configMapKeyRef:
                 name: platform-config
                 key: worker_zones_rentry_buffer_time
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmp-volume
+      volumes:
+      - name: tmp-volume
+        emptyDir: {}
