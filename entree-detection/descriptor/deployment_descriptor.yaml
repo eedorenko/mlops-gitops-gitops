@@ -1,12 +1,12 @@
 apiVersion: hub.kalypso.io/v1alpha1
 kind: DeploymentDescriptor
 metadata:
-  name: dev-burger-detection
+  name: dev-entree-detection
   labels:
     config-revision: a5d8f49e9820ea1ef28cf4a07e17b61b90e59124
 spec:
   workload:
-    name: burger-detection
+    name: entree-detection
     source:
         repo: https://github.com/eedorenko/mlops-gitops
         branch: main
@@ -16,12 +16,12 @@ spec:
         workspace:
             name: dt
   deploymentTarget:
-    name: burger-detection-dev
+    name: entree-detection-dev
     environment: dev
     manifests:
         repo: https://github.com/eedorenko/mlops-gitops-gitops
         branch: dev
-        path: ./burger-detection
+        path: ./entree-detection
   workloadVersion:
     version: 0.0.1-97
     commit: 88e0cd89e19bccc2def4ae7887c606d77b729c48

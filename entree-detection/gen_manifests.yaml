@@ -1,0 +1,159 @@
+---
+# Source: TacosBurritos/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: entree-detection-config
+  annotations:
+    version: 0.0.1-97
+  
+data:  
+  TASK_TYPE: object_detection
+  MODEL_CLASS_MAPPING: |
+      {0: raw_chicken_wing, 1:raw_chicken_thigh,
+      2:raw_chicken_drum, 3:raw_chicken_breast, 
+      4: cooked_chicken_wing, 5: cooked_chicken_thigh, 
+      6: cooked_chicken_drum, 7:cooked_chicken_breast}
+      
+      
+  MODEL_CONFIDENCE_THRESHOLD: "0.65"
+  WORKER_OPERATING_FPS: "6"
+  WORKER_TRACKER_NAME: norfair
+  WORKER_TRACKER_DISTANCE_FUNCTION: "kou"
+  WORKER_TRACKER_DISTANCE_THRESHOLD: "0.75"
+---
+# Source: TacosBurritos/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: entree-detection-service
+      
+spec:
+  selector:
+    task: entree-detection
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+---
+# Source: TacosBurritos/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: entree-detection-deployment
+  annotations:
+    version: 0.0.1-97
+  
+spec:
+  strategy:
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      task: entree-detection
+  template:
+    metadata:
+      labels:
+        task: entree-detection
+      annotations:
+        version: 0.0.1-97
+    spec:
+      serviceAccountName: chicken-detection-sa
+      containers:
+      - name: inference-api
+        image: ghcr.io/eedorenko/mlops-gitops/chicken_detection_model_automl:0.0.1-97
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            cpu: 500m
+            memory: 250Mi
+          limits:
+            cpu: 1000m
+            memory: 1000Mi
+        readinessProbe:
+          httpGet:
+            path: /predict
+            port: 8000
+        livenessProbe:
+          httpGet:
+            path: /predict
+            port: 8000
+        securityContext:
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          runAsUser: 10100
+          runAsGroup: 10100
+          seccompProfile:
+            type: RuntimeDefault
+          runAsNonRoot: true
+          capabilities:
+            drop:
+              - ALL
+        envFrom:
+        - configMapRef:
+            name: entree-detection-config
+        #read env vars from configmap
+        env:
+          - name: TASK_TYPE
+            valueFrom:
+              configMapKeyRef:
+                name: platform-config
+                key: task_type
+          - name: MODEL_CLASS_MAPPING
+            valueFrom:
+              configMapKeyRef:
+                name: platform-config
+                key: model_class_mapping
+          - name: MODEL_CONFIDENCE_THRESHOLD
+            valueFrom:
+              configMapKeyRef:
+                name: platform-config
+                key: model_confidence_threshold
+          - name: WORKER_OPERATING_FPS
+            valueFrom:
+              configMapKeyRef:
+                name: platform-config
+                key: worker_operating_fps
+          - name: WORKER_TRACKER_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: platform-config
+                key: worker_tracker_name
+          - name: WORKER_TRACKER_DISTANCE_FUNCTION
+            valueFrom:
+              configMapKeyRef:
+                name: platform-config
+                key: worker_tracker_distance_function
+          - name: WORKER_TRACKER_DISTANCE_THRESHOLD
+            valueFrom:
+              configMapKeyRef:
+                name: platform-config
+                key: worker_tracker_distance_threshold
+          - name: WORKER_CAMERAS
+            valueFrom:
+              configMapKeyRef:
+                name: platform-config
+                key: worker_cameras
+          - name: WORKER_ZONES
+            valueFrom:
+              configMapKeyRef:
+                name: platform-config
+                key: worker_zones
+          - name: WORKER_ZONES_ZONE_BOUNDARY_THRESHOLD
+            valueFrom:
+              configMapKeyRef:
+                name: platform-config
+                key: worker_zones_zone_boundary_threshold
+          - name: WORKER_ZONES_RENTRY_BUFFER_TIME
+            valueFrom:
+              configMapKeyRef:
+                name: platform-config
+                key: worker_zones_rentry_buffer_time
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmp-volume
+      volumes:
+      - name: tmp-volume
+        emptyDir: {}
