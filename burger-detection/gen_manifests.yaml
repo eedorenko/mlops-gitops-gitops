@@ -28,8 +28,8 @@ spec:
     app: burger-detection
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
+      port: 8000
+      targetPort: 8000
 ---
 # Source: TacosBurritos/templates/deployment.yaml
 apiVersion: apps/v1
@@ -70,11 +70,11 @@ spec:
         readinessProbe:
           httpGet:
             path: /predict
-            port: 8080
+            port: 8000
         livenessProbe:
           httpGet:
             path: /predict
-            port: 8080
+            port: 8000
         securityContext:
           readOnlyRootFilesystem: true
           allowPrivilegeEscalation: false
