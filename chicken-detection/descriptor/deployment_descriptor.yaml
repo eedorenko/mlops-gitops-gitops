@@ -3,7 +3,7 @@ kind: DeploymentDescriptor
 metadata:
   name: prod-gray-chicken-detection
   labels:
-    config-revision: 8c468bbe04ac9cc0395551ae050770eb40aed4d0
+    config-revision: c4fbcf4a5e60e07a5325e435b5c2d474acba0dbd
 spec:
   workload:
     name: entree-detection
