@@ -69,11 +69,11 @@ spec:
             memory: 1000Mi
         readinessProbe:
           httpGet:
-            path: /health
+            path: /predict
             port: 8080
         livenessProbe:
           httpGet:
-            path: /health
+            path: /predict
             port: 8080
         securityContext:
           readOnlyRootFilesystem: true
