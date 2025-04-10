@@ -23,5 +23,5 @@ spec:
         branch: stage
         path: ./burger-detection
   workloadVersion:
-    version: 0.0.1-99
-    commit: 12c8674ace53ff026258fd3508e4ba7544be39a7
+    version: 0.0.1-100
+    commit: 0ec3a781edf34673aa836e5667f3d2c42fce44b9
