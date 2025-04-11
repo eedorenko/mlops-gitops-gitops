@@ -23,5 +23,5 @@ spec:
         branch: stage
         path: ./entree-detection
   workloadVersion:
-    version: 0.0.1-100
-    commit: 0ec3a781edf34673aa836e5667f3d2c42fce44b9
+    version: 0.0.1-101
+    commit: 0f4b6e6472cabd96241e6559ad89f5eadeac71c5
